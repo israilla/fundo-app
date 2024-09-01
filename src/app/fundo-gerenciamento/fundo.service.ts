@@ -24,10 +24,11 @@ export class ServicoFundo {
   }
 
   atualizarFundo(fundo: FundoDto): Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/${fundo.codigo}`, fundo, {
+    return this.http.put(this.apiUrl, fundo, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })
+      }),
+      responseType: 'text'
     });
   }
 

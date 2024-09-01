@@ -1,4 +1,3 @@
-// src/app/fundo-cadastro/fundo-cadastro.component.ts
 import { Component } from '@angular/core';
 import { ServicoFundo } from '../fundo-gerenciamento/fundo.service';
 import { FundoDto } from '../fundo-gerenciamento/fundo.model';
@@ -25,20 +24,11 @@ export class FundoCadastroComponent {
         this.mensagemSucesso = response;
         this.novoFundo = { codigo: '', nome: '', cnpj: '', codigoTipo: 0, patrimonio: 0, nomeTipo: '' };
       },
-      error: err => {
+      error: erro => {
         this.mensagemSucesso = null;
-        this.mensagemErro = err.error || 'Ocorreu um erro ao adicionar o fundo. Por favor, tente novamente.';
-        console.error('Erro ao adicionar fundo:', err);
+        this.mensagemErro = erro.error || 'Ocorreu um erro ao adicionar o fundo. Por favor, tente novamente.';
+        console.error('Erro ao adicionar fundo:', erro);
       }
     });
-  }
-
-  isFormValid(): boolean {
-    return this.novoFundo.codigo !== '' &&
-           this.novoFundo.nome !== '' &&
-           this.novoFundo.cnpj !== '' &&
-           this.novoFundo.codigoTipo !== 0 &&
-           this.novoFundo.patrimonio !== 0 &&
-           this.novoFundo.nomeTipo !== '';
   }
 }

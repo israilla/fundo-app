@@ -17,14 +17,13 @@ export class FundoGerenciamentoComponent implements OnInit {
   valorPatrimonio: number = 0;
   codigoPesquisa: string = '';
   atualizacaoPatrimonioVisivel: boolean = false;
+  mensagemRetorno: string | null = null;
+  mensagemSucesso: string | null = null;
+  mensagemErro: string | null = null;
 
   constructor(private servicoFundo: ServicoFundo) { }
 
   ngOnInit(): void {
-  }
-
-  onCarregarFundos(): void {
-    this.carregarFundos();
   }
 
   carregarFundos(): void {
@@ -34,18 +33,27 @@ export class FundoGerenciamentoComponent implements OnInit {
     });
   }
 
-  onPesquisarFundo(): void {
+  pesquisarFundo(): void {
+    this.mensagemRetorno = ''
+    this.mensagemErro = ''
     if (this.codigoPesquisa.trim()) {
-      this.servicoFundo.obterFundoPorCodigo(this.codigoPesquisa).subscribe(fundo => {
-        if (fundo) {
-          this.fundos = [fundo];
-        } else {
+      this.servicoFundo.obterFundoPorCodigo(this.codigoPesquisa).subscribe({
+        next: (fundo) => {
+          if (fundo) {
+            this.fundos = [fundo];
+          }
+        },
+        error: (erro) => {
+          if (erro.status === 400) {
+            this.mensagemErro = 'Fundo não encontrado.';
+          } else {
+            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo.';
+          }
           this.fundos = [];
-          alert('Fundo não encontrado.');
         }
       });
     } else {
-      alert('Por favor, insira um código para pesquisar.');
+      this.mensagemErro = 'Por favor, insira um código para pesquisar.';
     }
   }
 
@@ -61,16 +69,22 @@ export class FundoGerenciamentoComponent implements OnInit {
   }
 
   atualizarFundo(): void {
+    this.mensagemSucesso = '';
+    this.mensagemErro = '';
     if (this.fundoSelecionado) {
-      this.servicoFundo.atualizarFundo(this.fundoSelecionado).subscribe(response => {
-        alert(response);
-        this.carregarFundos();
-        this.fundoSelecionado = undefined;
-        this.atualizacaoPatrimonioVisivel = false;
+      this.servicoFundo.atualizarFundo(this.fundoSelecionado).subscribe({
+        next: (response) => {
+          this.mensagemSucesso = response;
+          this.carregarFundos();
+          this.fundoSelecionado = undefined;
+          this.atualizacaoPatrimonioVisivel = false;
+        },
+        error: (erro) => {
+          this.mensagemErro = erro.erro || 'Ocorreu um erro ao atualizar o fundo. Por favor, tente novamente.';;
+        }
       });
     }
   }
-
   excluirFundo(codigo: string): void {
     this.servicoFundo.excluirFundo(codigo).subscribe(response => {
       alert(response);

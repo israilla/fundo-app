@@ -9,4 +9,4 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi(),withFetch()),
   ],
-}).catch(err => console.error(err));
+}).catch(erro => console.error(erro));

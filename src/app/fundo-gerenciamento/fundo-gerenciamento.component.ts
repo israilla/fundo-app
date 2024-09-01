@@ -94,11 +94,19 @@ export class FundoGerenciamentoComponent implements OnInit {
 
   atualizarPatrimonio(): void {
     if (this.fundoSelecionado) {
-      this.servicoFundo.atualizarPatrimonio(this.fundoSelecionado.codigo, this.valorPatrimonio).subscribe(response => {
-        alert(response);
-        this.carregarFundos();
-        this.atualizacaoPatrimonioVisivel = false;
-      });
+      this.servicoFundo.atualizarPatrimonio(this.fundoSelecionado.codigo, this.valorPatrimonio)
+        .subscribe({
+          next: (response) => {
+            this.mensagemRetorno = response;
+            this.carregarFundos();
+            this.atualizacaoPatrimonioVisivel = false;
+            this.fundoSelecionado = undefined;
+          },
+          error: (err) => {
+            console.error('Erro ao atualizar patrimônio', err);
+            this.mensagemRetorno = 'Erro ao atualizar patrimônio';
+          }
+        });
     }
   }
 }

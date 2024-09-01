@@ -38,6 +38,6 @@ export class ServicoFundo {
 
   atualizarPatrimonio(codigo: string, valor: number): Observable<string> {
     console.log('patriminio', valor);
-    return this.http.put<string>(`${this.apiUrl}/${codigo}/patrimonio`, valor);
+    return this.http.put<string>(`${this.apiUrl}/${codigo}/patrimonio?valor=${valor}`, {},{responseType: 'text' as 'json'});
   }
 }

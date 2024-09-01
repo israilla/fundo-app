@@ -1,0 +1,60 @@
+<div class="container">
+  <h1>Gerenciar Fundos</h1>
+
+  <div class="search-container">
+    <input [(ngModel)]="codigoPesquisa" name="codigoPesquisa" placeholder="Pesquisar por código" />
+    <button (click)="onPesquisarFundo()">Pesquisar</button>
+    <button (click)="onCarregarFundos()">Carregar Todos os Fundos</button>
+  </div>
+
+  <div class="table-container" *ngIf="fundos.length > 0">
+    <h2>Fundos Cadastrados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>CNPJ</th>
+          <th>Tipo</th>
+          <th>Patrimônio</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fundo of fundos">
+          <td>{{fundo.codigo}}</td>
+          <td>{{fundo.nome}}</td>
+          <td>{{fundo.cnpj}}</td>
+          <td>{{fundo.codigoTipo}} - {{fundo.nomeTipo}}</td>
+          <td>{{fundo.patrimonio | currency:'BRL'}}</td>
+          <td>
+            <button (click)="selecionarFundo(fundo)">Editar</button>
+            <button (click)="prepararAtualizarPatrimonio(fundo)">Atualizar Patrimônio</button>
+            <button (click)="excluirFundo(fundo.codigo)">Excluir</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-container" *ngIf="fundoSelecionado && !atualizacaoPatrimonioVisivel">
+    <h2>Editar Fundo</h2>
+    <form (ngSubmit)="atualizarFundo()">
+      <input [(ngModel)]="fundoSelecionado.codigo" name="codigo" placeholder="Código" disabled>
+      <input [(ngModel)]="fundoSelecionado.nome" name="nome" placeholder="Nome" required>
+      <input [(ngModel)]="fundoSelecionado.cnpj" name="cnpj" placeholder="CNPJ" required>
+      <input [(ngModel)]="fundoSelecionado.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required>
+      <input [(ngModel)]="fundoSelecionado.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required>
+      <button type="submit">Atualizar Fundo</button>
+    </form>
+  </div>
+
+  <div class="patrimonio-update-container" *ngIf="atualizacaoPatrimonioVisivel">
+    <h3>Atualizar Patrimônio</h3>
+    <form (ngSubmit)="atualizarPatrimonio()">
+      <input [(ngModel)]="valorPatrimonio" name="valorPatrimonio" placeholder="Valor" type="number" required>
+      <button type="submit">Atualizar Patrimônio</button>
+    </form>
+  </div>
+</div>

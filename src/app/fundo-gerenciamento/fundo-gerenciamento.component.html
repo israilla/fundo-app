@@ -85,8 +85,8 @@
     <form (ngSubmit)="atualizarPatrimonio()">
       <input [(ngModel)]="valorPatrimonio" name="valorPatrimonio" placeholder="Valor" type="number" required>
       <button type="submit">Atualizar Patrimônio</button>
-      <div *ngIf="mensagem" class="mensagem">
-        {{ mensagem }}
+      <div *ngIf="mensagemRetorno" class="mensagem-retorno">
+        {{ mensagemRetorno }}
       </div>
     </form>
   </div>

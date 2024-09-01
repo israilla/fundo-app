@@ -3,8 +3,9 @@
 
   <div class="search-container">
     <input [(ngModel)]="codigoPesquisa" name="codigoPesquisa" placeholder="Pesquisar por código" />
-    <button (click)="onPesquisarFundo()">Pesquisar</button>
-    <button (click)="onCarregarFundos()">Carregar Todos os Fundos</button>
+    <button (click)="pesquisarFundo()">Pesquisar</button>
+    <button (click)="carregarFundos()">Carregar Todos os Fundos</button>
+      <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
   </div>
 
   <div class="table-container" *ngIf="fundos.length > 0">
@@ -38,17 +39,45 @@
     </table>
   </div>
 
-  <div class="form-container" *ngIf="fundoSelecionado && !atualizacaoPatrimonioVisivel">
-    <h2>Editar Fundo</h2>
-    <form (ngSubmit)="atualizarFundo()">
-      <input [(ngModel)]="fundoSelecionado.codigo" name="codigo" placeholder="Código" disabled>
-      <input [(ngModel)]="fundoSelecionado.nome" name="nome" placeholder="Nome" required>
-      <input [(ngModel)]="fundoSelecionado.cnpj" name="cnpj" placeholder="CNPJ" required>
-      <input [(ngModel)]="fundoSelecionado.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required>
-      <input [(ngModel)]="fundoSelecionado.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required>
-      <button type="submit">Atualizar Fundo</button>
-    </form>
-  </div>
+<div class="form-container" *ngIf="fundoSelecionado && !atualizacaoPatrimonioVisivel">
+  <h2>Editar Fundo</h2>
+  <form (ngSubmit)="atualizarFundo()" #fundoAtualizacaoForm="ngForm">
+    <div class="form-group">
+      <label for="codigo">Código:</label>
+      <input id="codigo" [(ngModel)]="fundoSelecionado.codigo" name="codigo" placeholder="Código" disabled>
+    </div>
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input id="nome" [(ngModel)]="fundoSelecionado.nome" name="nome" placeholder="Nome" required>
+       <div *ngIf="fundoSelecionado.nome == '' " class="erro">
+        O campo Nome é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cnpj">CNPJ:</label>
+      <input id="cnpj" [(ngModel)]="fundoSelecionado.cnpj" name="cnpj" placeholder="CNPJ" required>
+      <div *ngIf="fundoSelecionado.cnpj == '' " class="erro">
+        O campo CNPJ é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="codigoTipo">Código Tipo:</label>
+      <input id="codigoTipo" [(ngModel)]="fundoSelecionado.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required>
+       <div *ngIf="fundoSelecionado.codigoTipo == null " class="erro">
+        O campo Código Tipo é obrigatório.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="patrimonio">Patrimônio:</label>
+      <input id="patrimonio" [(ngModel)]="fundoSelecionado.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required>
+      <div *ngIf="fundoSelecionado.patrimonio == null " class="erro">
+        O campo Patrimônio é obrigatório.
+      </div>
+    </div>
+    <button type="submit" [disabled]="!fundoAtualizacaoForm.form.valid">Atualizar Fundo</button>
+  </form>
+  <div *ngIf="mensagemRetorno" class="mensagem-retorno">{{ mensagemRetorno }}</div>
+</div>
 
   <div class="patrimonio-update-container" *ngIf="atualizacaoPatrimonioVisivel">
     <h3>Atualizar Patrimônio</h3>
@@ -57,4 +86,7 @@
       <button type="submit">Atualizar Patrimônio</button>
     </form>
   </div>
+  <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+    {{ mensagemSucesso }}
+    </div>
 </div>

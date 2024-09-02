@@ -31,6 +31,8 @@ export class FundoGerenciamentoComponent implements OnInit {
       this.fundos = data;
       this.atualizacaoPatrimonioVisivel = false;
     });
+
+    this.fundoSelecionado = undefined
   }
 
   pesquisarFundo(): void {
@@ -41,6 +43,7 @@ export class FundoGerenciamentoComponent implements OnInit {
         next: (fundo) => {
           if (fundo) {
             this.fundos = [fundo];
+            this.fundoSelecionado = fundo
           }
         },
         error: (erro) => {
@@ -58,7 +61,7 @@ export class FundoGerenciamentoComponent implements OnInit {
   }
 
   selecionarFundo(fundo: FundoDto): void {
-    this.fundoSelecionado = { ...fundo };
+    this.fundoSelecionado = fundo;
     this.atualizacaoPatrimonioVisivel = false;
   }
 

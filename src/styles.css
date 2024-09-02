@@ -8,21 +8,24 @@ body {
   background: #FF6200;
 }
 
-div {
+div, main {
   --sb-track-color: #FCFAF9;
   --sb-thumb-color: #FF6200;
   --sb-size: 10px;
 }
 
+main::-webkit-scrollbar,
 div::-webkit-scrollbar {
   width: var(--sb-size)
 }
 
+main::-webkit-scrollbar-track,
 div::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 6px;
 }
 
+main::-webkit-scrollbar-thumb,
 div::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 6px;

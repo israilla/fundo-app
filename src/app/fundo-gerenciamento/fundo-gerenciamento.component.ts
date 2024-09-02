@@ -103,16 +103,39 @@ export class FundoGerenciamentoComponent implements OnInit {
       this.servicoFundo.atualizarPatrimonio(this.fundoSelecionado.codigo, this.valorPatrimonio)
         .subscribe({
           next: (response) => {
-            this.mensagemRetorno = response;
-            this.carregarFundos();
-            this.atualizacaoPatrimonioVisivel = false;
-            this.fundoSelecionado = undefined;
+            this.mensagemSucesso = response;
+            var codigo = this.fundoSelecionado?.codigo;
+            if(codigo!=null){
+              this.obterFundoAtualizado(codigo);
+            }
+            this.atualizacaoPatrimonioVisivel = true;
           },
           error: (err) => {
+            this.mensagemSucesso  = ''
             console.error('Erro ao atualizar patrimônio', err);
             this.mensagemRetorno = 'Erro ao atualizar patrimônio';
           }
         });
     }
+  }
+  obterFundoAtualizado(codigo: string): void {
+    this.mensagemRetorno = ''
+    this.mensagemErro = ''
+      this.servicoFundo.obterFundoPorCodigo(codigo).subscribe({
+        next: (fundo) => {
+          if (fundo) {
+            this.fundos = [fundo];
+            this.fundoSelecionado = fundo
+          }
+        },
+        error: (erro) => {
+          if (erro.status === 400) {
+            this.mensagemErro = 'Erro ao obter fundo atualizado.';
+          } else {
+            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo.';
+          }
+          this.fundos = [];
+        }
+      });
   }
 }

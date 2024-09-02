@@ -17,6 +17,7 @@ export class FundoGerenciamentoComponent implements OnInit {
   valorPatrimonio: number = 0;
   codigoPesquisa: string = '';
   atualizacaoPatrimonioVisivel: boolean = false;
+  editarFundoVisivel: boolean = false;
   mensagemRetorno: string | null = null;
   mensagemSucesso: string | null = null;
   mensagemErro: string | null = null;
@@ -63,6 +64,7 @@ export class FundoGerenciamentoComponent implements OnInit {
   selecionarFundo(fundo: FundoDto): void {
     this.fundoSelecionado = fundo;
     this.atualizacaoPatrimonioVisivel = false;
+    this.editarFundoVisivel = true;
   }
 
   prepararAtualizarPatrimonio(fundo: FundoDto): void {
@@ -74,6 +76,7 @@ export class FundoGerenciamentoComponent implements OnInit {
   atualizarFundo(): void {
     this.mensagemSucesso = '';
     this.mensagemErro = '';
+    this.editarFundoVisivel = true;
     if (this.fundoSelecionado) {
       this.servicoFundo.atualizarFundo(this.fundoSelecionado).subscribe({
         next: (response) => {

@@ -42,7 +42,7 @@
     </table>
   </div>
 
-  <div class="form-container" *ngIf="fundoSelecionado && !atualizacaoPatrimonioVisivel">
+  <div class="form-container" *ngIf="fundoSelecionado && !atualizacaoPatrimonioVisivel && editarFundoVisivel">
     <h2>Editar Fundo</h2>
     <form (ngSubmit)="atualizarFundo()" #fundoAtualizacaoForm="ngForm">
       <div class="form-group">

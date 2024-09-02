@@ -8,7 +8,7 @@
         <input id="nome" [(ngModel)]="novoFundo.nome" name="nome" placeholder="John Doe" required #nome="ngModel">
       </div>
 
-      <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="erro">
+      <div *ngIf="nome.invalid  && (nome.dirty || nome.touched)" class="erro">
         Nome é obrigatório.
       </div>
     </div>
@@ -16,7 +16,16 @@
     <div class="form-group">
       <div class="form-input-label">
         <label for="cnpj">CNPJ</label>
-        <input id="cnpj" [(ngModel)]="novoFundo.cnpj" name="cnpj" placeholder="00.000.000/0000-00" required #cnpj="ngModel">
+        <input
+          id="cnpj"
+          name="cnpj"
+          [(ngModel)]="novoFundo.cnpj"
+          placeholder="00.000.000/0000-00"
+          type='text'
+          mask="00.000.000/0000-00"
+          required
+          #cnpj="ngModel"
+        >
       </div>
 
       <div *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)" class="erro">

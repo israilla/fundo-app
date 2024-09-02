@@ -33,7 +33,6 @@ export class FundoCadastroComponent {
       error: erro => {
         this.mensagemSucesso = null;
         this.mensagemErro = erro.error || 'Ocorreu um erro ao adicionar o fundo. Por favor, tente novamente.';
-        console.error('Erro ao adicionar fundo:', erro);
       }
     });
   }

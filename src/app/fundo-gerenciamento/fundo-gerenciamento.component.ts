@@ -51,7 +51,7 @@ export class FundoGerenciamentoComponent implements OnInit {
           if (erro.status === 400) {
             this.mensagemErro = 'Fundo não encontrado.';
           } else {
-            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo.';
+            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo! Por favor, tente novamente mais tarde.';
           }
           this.fundos = [];
         }
@@ -112,7 +112,6 @@ export class FundoGerenciamentoComponent implements OnInit {
           },
           error: (err) => {
             this.mensagemSucesso  = ''
-            console.error('Erro ao atualizar patrimônio', err);
             this.mensagemRetorno = 'Erro ao atualizar patrimônio';
           }
         });
@@ -130,9 +129,9 @@ export class FundoGerenciamentoComponent implements OnInit {
         },
         error: (erro) => {
           if (erro.status === 400) {
-            this.mensagemErro = 'Erro ao obter fundo atualizado.';
+            this.mensagemErro = 'Erro ao obter fundo atualizado. Por favor, tente novamente mais tarde.';
           } else {
-            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo.';
+            this.mensagemErro = 'Ocorreu um erro ao buscar o fundo! Por favor, tenten novamente mais tarde.';
           }
           this.fundos = [];
         }

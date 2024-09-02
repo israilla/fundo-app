@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common'
 import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
@@ -10,4 +11,9 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 })
 export class AppComponent {
   title = 'fundo-app';
+  constructor(private location: Location) {}
+
+  goBack(): void {
+    this.location.back();
+  }
 }

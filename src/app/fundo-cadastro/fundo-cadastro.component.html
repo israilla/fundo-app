@@ -1,41 +1,62 @@
-<div class="form-container">
+<div id="form-container">
   <h2>Adicionar Novo Fundo</h2>
-  <form (ngSubmit)="incluirFundo()" #fundoForm="ngForm">
+
+  <form (ngSubmit)="incluirFundo()" #fundoForm="ngForm" id="form-novo-fundo">
     <div class="form-group">
-      <label for="nome">Nome</label>
-      <input id="nome" [(ngModel)]="novoFundo.nome" name="nome" placeholder="Nome" required #nome="ngModel">
+      <div class="form-input-label">
+        <label for="nome">Nome</label>
+        <input id="nome" [(ngModel)]="novoFundo.nome" name="nome" placeholder="John Doe" required #nome="ngModel">
+      </div>
+
       <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="erro">
         Nome é obrigatório.
       </div>
     </div>
+
     <div class="form-group">
-      <label for="cnpj">CNPJ</label>
-      <input id="cnpj" [(ngModel)]="novoFundo.cnpj" name="cnpj" placeholder="CNPJ" required #cnpj="ngModel">
+      <div class="form-input-label">
+        <label for="cnpj">CNPJ</label>
+        <input id="cnpj" [(ngModel)]="novoFundo.cnpj" name="cnpj" placeholder="00.000.000/0000-00" required #cnpj="ngModel">
+      </div>
+
       <div *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)" class="erro">
         CNPJ é obrigatório.
       </div>
     </div>
+
     <div class="form-group">
-      <label for="codigoTipo">Código Tipo</label>
-      <input id="codigoTipo" [(ngModel)]="novoFundo.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required #codigoTipo="ngModel">
+       <div class="form-input-label">
+        <label for="codigoTipo">Código Tipo</label>
+        <input id="codigoTipo" [(ngModel)]="novoFundo.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required #codigoTipo="ngModel">
+      </div>
+
       <div *ngIf="codigoTipo.invalid && (codigoTipo.dirty || codigoTipo.touched)" class="erro">
         Código Tipo é obrigatório.
       </div>
     </div>
+
     <div class="form-group">
-      <label for="nomeTipo">Nome Tipo</label>
-      <input id="nomeTipo" [(ngModel)]="novoFundo.nomeTipo" name="nomeTipo" placeholder="Nome Tipo" required #nomeTipo="ngModel">
+      <div class="form-input-label">
+        <label for="nomeTipo">Nome Tipo</label>
+        <input id="nomeTipo" [(ngModel)]="novoFundo.nomeTipo" name="nomeTipo" placeholder="Nome Tipo" required #nomeTipo="ngModel">
+      </div>
+
       <div *ngIf="nomeTipo.invalid && (nomeTipo.dirty || nomeTipo.touched)" class="erro">
         Nome Tipo é obrigatório.
       </div>
     </div>
+
     <div class="form-group">
-      <label for="patrimonio">Patrimônio</label>
-      <input id="patrimonio" [(ngModel)]="novoFundo.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required #patrimonio="ngModel">
+      <div class="form-input-label">
+        <label for="patrimonio">Patrimônio</label>
+        <input id="patrimonio" [(ngModel)]="novoFundo.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required #patrimonio="ngModel">
+      </div>
+
       <div *ngIf="patrimonio.invalid && (patrimonio.dirty || patrimonio.touched)" class="erro">
         Patrimônio é obrigatório.
       </div>
     </div>
+
     <button type="submit" [disabled]="!fundoForm.form.valid">Adicionar Fundo</button>
     <div *ngIf="mensagemErro" class="mensagem-erro">
       {{ mensagemErro }}

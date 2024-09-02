@@ -1,19 +1,65 @@
-.form-group {
-  margin-bottom: 15px;
+#form-container {
+  margin-top: 2rem;
   display: flex;
+  flex: 1;
+  align-self: flex-start;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+#form-novo-fundo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  & button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #FF6200;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+  }
+}
+
+.form-input-label {
+  position: relative;
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  label {
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    padding: 0.1rem;
+    text-align: center;
+    background-color: #ffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.form-group label {
-  width: 120px;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.form-group input {
-  width: 200px;
-  padding: 5px;
-}
 
 .erro {
   color: red;

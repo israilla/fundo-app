@@ -2,21 +2,103 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  overflow: auto;
+  & h1 {
+    font-size: x-large;
+  }
+}
+
+#search-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-self: flex-start;
+  & div {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+#table-container {
+  overflow: auto;
+  max-height: 500px;
+  margin-top: 2rem;
+  padding: 0.2rem;
+
+  h2 {
+    font-size: x-large;
+  }
+
+  table {
+    border-collapse: collapse;
+    border: solid 1px #ccc;
+    th {
+      border: solid 1px #ccc;
+    }
+    tr:nth-child(even) { background-color: #ffd9c1; }
+  }
+
+  th, td {
+    padding: 0.5rem;
+  }
+}
+
+#table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 1;
+
+  & button {
+    padding: 0.2rem;
+    font-weight: 500;
+    background-color: #013395;
+
+    &:hover { background-color: #01329581;  }
+  }
 }
 
 h1 {
   font-size: 2.5em;
   color: #000;
-  margin-bottom: 20px;
 }
 
-.list-container,
 .form-container {
-  margin-bottom: 30px;
+  margin-top: 2rem;
+  gap: 1rem;
+
+  form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    button {
+      width: 200px;
+    }
+  }
+}
+
+.patrimonio-update-container {
+  display: flex;
+  margin-top: 2rem;
+  gap: 0.3rem;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    gap: 1rem;
+  }
 }
 
 h2 {
-  font-size: 2em;
+  font-size: x-large;
   color: #333;
   margin-bottom: 15px;
 }
@@ -43,11 +125,11 @@ button {
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 5px;
+
 }
 
 button:hover {
-  background-color: #e64a19;
+  background-color: #e64919a7;
 }
 
 form {
@@ -56,11 +138,33 @@ form {
 }
 
 input {
-  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1em;
+}
+
+.form-input-label {
+  position: relative;
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  label {
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    padding: 0.1rem;
+    text-align: center;
+    background-color: #ffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
 }
 
 button[type="submit"] {
@@ -85,20 +189,10 @@ button[type="submit"]:hover {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group label {
-  display: inline-block;
-  width: 120px;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.form-group input {
-  width: 200px;
-  padding: 5px;
-}
 .error {
   color: red;
   font-size: 0.875em;

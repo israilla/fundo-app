@@ -1,14 +1,16 @@
 <div class="container">
-  <h1>Gerenciar Fundos</h1>
+  <div id="search-container">
+    <h1>Gerenciar Fundos</h1>
 
-  <div class="search-container">
-    <input [(ngModel)]="codigoPesquisa" name="codigoPesquisa" placeholder="Pesquisar por código" />
-    <button (click)="pesquisarFundo()">Pesquisar</button>
-    <button (click)="carregarFundos()">Carregar Todos os Fundos</button>
-    <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+    <div>
+      <input [(ngModel)]="codigoPesquisa" name="codigoPesquisa" placeholder="Pesquisar por código" />
+      <button (click)="pesquisarFundo()">Pesquisar</button>
+      <button (click)="carregarFundos()">Carregar Todos os Fundos</button>
+    </div>
+    <span *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</span>
   </div>
 
-  <div class="table-container" *ngIf="fundos.length > 0">
+  <div id="table-container" *ngIf="fundos.length > 0">
     <h2>Fundos Cadastrados</h2>
     <table>
       <thead>
@@ -29,10 +31,10 @@
             <td>{{fundo.cnpj}}</td>
             <td>{{fundo.codigoTipo}} - {{fundo.nomeTipo}}</td>
             <td>{{fundo.patrimonio | currency:'BRL'}}</td>
-            <td>
+            <td id="table-actions">
               <button (click)="selecionarFundo(fundo)">Editar</button>
-              <button (click)="prepararAtualizarPatrimonio(fundo)">Atualizar Patrimônio</button>
               <button (click)="excluirFundo(fundo.codigo)">Excluir</button>
+              <button (click)="prepararAtualizarPatrimonio(fundo)">Atualizar patrimônio</button>
             </td>
           </tr>
         </ng-container>
@@ -44,37 +46,55 @@
     <h2>Editar Fundo</h2>
     <form (ngSubmit)="atualizarFundo()" #fundoAtualizacaoForm="ngForm">
       <div class="form-group">
-        <label for="codigo">Código:</label>
-        <input id="codigo" [(ngModel)]="fundoSelecionado.codigo" name="codigo" placeholder="Código" disabled>
+        <div class="form-input-label">
+          <label for="codigo">Código:</label>
+          <input id="codigo" [(ngModel)]="fundoSelecionado.codigo" name="codigo" placeholder="Código" disabled>
+        </div>
       </div>
+
       <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input id="nome" [(ngModel)]="fundoSelecionado.nome" name="nome" placeholder="Nome" required>
+        <div class="form-input-label">
+          <label for="nome">Nome:</label>
+          <input id="nome" [(ngModel)]="fundoSelecionado.nome" name="nome" placeholder="Nome" required>
+        </div>
         <div *ngIf="fundoSelecionado.nome == ''" class="erro">
           O campo Nome é obrigatório.
         </div>
       </div>
+
       <div class="form-group">
-        <label for="cnpj">CNPJ:</label>
-        <input id="cnpj" [(ngModel)]="fundoSelecionado.cnpj" name="cnpj" placeholder="CNPJ" required>
+        <div class="form-input-label">
+          <label for="cnpj">CNPJ:</label>
+          <input id="cnpj" [(ngModel)]="fundoSelecionado.cnpj" name="cnpj" placeholder="CNPJ" required>
+        </div>
+
         <div *ngIf="fundoSelecionado.cnpj == ''" class="erro">
           O campo CNPJ é obrigatório.
         </div>
       </div>
+
       <div class="form-group">
-        <label for="codigoTipo">Código Tipo:</label>
-        <input id="codigoTipo" [(ngModel)]="fundoSelecionado.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required>
+        <div class="form-input-label">
+          <label for="codigoTipo">Código Tipo:</label>
+          <input id="codigoTipo" [(ngModel)]="fundoSelecionado.codigoTipo" name="codigoTipo" placeholder="Código Tipo" type="number" required>
+        </div>
+
         <div *ngIf="fundoSelecionado.codigoTipo == null" class="erro">
           O campo Código Tipo é obrigatório.
         </div>
       </div>
+
       <div class="form-group">
-        <label for="patrimonio">Patrimônio:</label>
-        <input id="patrimonio" [(ngModel)]="fundoSelecionado.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required>
+        <div class="form-input-label">
+          <label for="patrimonio">Patrimônio:</label>
+          <input id="patrimonio" [(ngModel)]="fundoSelecionado.patrimonio" name="patrimonio" placeholder="Patrimônio" type="number" required>
+        </div>
+
         <div *ngIf="fundoSelecionado.patrimonio == null" class="erro">
           O campo Patrimônio é obrigatório.
         </div>
       </div>
+
       <button type="submit" [disabled]="!fundoAtualizacaoForm.form.valid">Atualizar Fundo</button>
     </form>
     <div *ngIf="mensagemRetorno" class="mensagem-retorno">{{ mensagemRetorno }}</div>

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {Interceptor} from './interceptors/interceptor'
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FundoCadastroComponent } from './fundo-cadastro/fundo-cadastro.component';
 import { FundoGerenciamentoComponent } from './fundo-gerenciamento/fundo-gerenciamento.component';
 
@@ -17,10 +16,9 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), FormsModule, NgxMaskDirective, NgxMaskPipe],
+  imports: [RouterModule.forRoot(routes), FormsModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
-    provideNgxMask()
   ],
   exports: [RouterModule]
 })

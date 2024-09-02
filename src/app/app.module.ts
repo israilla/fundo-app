@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { provideHttpClient, withInterceptorsFromDi,withFetch } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -14,12 +13,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi(), withFetch()),
-    provideNgxMask()
+    provideHttpClient(withInterceptorsFromDi(), withFetch())
   ],
 })
 export class AppModule { }

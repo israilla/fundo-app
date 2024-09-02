@@ -67,8 +67,11 @@
     </div>
 
     <button type="submit" [disabled]="!fundoForm.form.valid">Adicionar Fundo</button>
-    <div *ngIf="mensagemErro" class="mensagem-erro">
-      {{ mensagemErro }}
-    </div>
   </form>
+  <div *ngIf="mensagemErro" class="mensagem-erro">
+    {{ mensagemErro }}
+  </div>
+  <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+    {{ mensagemSucesso }}
+  </div>
 </div>

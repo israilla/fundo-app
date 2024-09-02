@@ -3,7 +3,7 @@ import { ServicoFundo } from '../fundo-gerenciamento/fundo.service';
 import { FundoDto } from '../fundo-gerenciamento/fundo.model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-fundo-cadastro',
@@ -11,6 +11,7 @@ import { NgxMaskDirective } from 'ngx-mask';
   styleUrls: ['./fundo-cadastro.component.css'],
   imports: [FormsModule, CommonModule, NgxMaskDirective],
   standalone: true,
+  providers: [provideNgxMask()],
 })
 export class FundoCadastroComponent {
   novoFundo: FundoDto = { codigo: '', nome: '', cnpj: '', codigoTipo: 0, patrimonio: 0, nomeTipo: '' };

@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    provideHttpClient(withInterceptorsFromDi(), withFetch())
   ],
 })
 export class AppModule { }

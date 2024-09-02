@@ -1,20 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ServicoFundo } from '../fundo-gerenciamento/fundo.service';
 import { FundoDto } from '../fundo-gerenciamento/fundo.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-fundo-cadastro',
   templateUrl: './fundo-cadastro.component.html',
   styleUrls: ['./fundo-cadastro.component.css'],
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, NgxMaskDirective],
   standalone: true,
+  providers: [provideNgxMask()],
 })
 export class FundoCadastroComponent {
   novoFundo: FundoDto = { codigo: '', nome: '', cnpj: '', codigoTipo: 0, patrimonio: 0, nomeTipo: '' };
   mensagemErro: string | null = null;
   mensagemSucesso: string | null = null;
+
+  @ViewChild('fundoForm') fundoForm!: NgForm;
+
   constructor(private servicoFundo: ServicoFundo) { }
 
   incluirFundo(): void {
@@ -23,6 +28,7 @@ export class FundoCadastroComponent {
         this.mensagemErro = null;
         this.mensagemSucesso = response;
         this.novoFundo = { codigo: '', nome: '', cnpj: '', codigoTipo: 0, patrimonio: 0, nomeTipo: '' };
+        this.fundoForm.resetForm()
       },
       error: erro => {
         this.mensagemSucesso = null;
